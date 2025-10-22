@@ -4,132 +4,136 @@
   <meta charset="UTF-8">
   <title>EDC অভিযোগ ফর্ম</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #eef6ff;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      transition: background 0.3s;
-    }
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 15px;
+    background: #eef6ff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background 0.3s;
+  }
 
-    h2 {
-      text-align: center;
-      color: #0d6efd;
-      margin-bottom: 20px;
-    }
+  h2 {
+    text-align: center;
+    color: #0d6efd;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
 
-    form {
-      max-width: 420px;
-      margin: auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+  form {
+    width: 95%;
+    max-width: 480px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
 
-    form:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
+  form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
 
-    label { 
-      display: block; 
-      margin-top: 10px; 
-      font-weight: bold; 
-    }
+  label { 
+    display: block; 
+    margin-top: 12px; 
+    font-weight: bold; 
+    font-size: 15px;
+  }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
+  input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 5px rgba(0,123,255,0.5);
-      outline: none;
-    }
+  input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+    outline: none;
+  }
 
-    select[name="type"] {
-      font-size: 12px;
-    }
+  button {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 18px;
+    font-size: 17px;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+  }
 
-    button {
-      width: 100%;
-      background: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 15px;
-      font-size: 16px;
-      padding: 10px;
-      border-radius: 5px;
-      transition: background 0.3s, transform 0.2s;
-    }
+  button:hover:not(:disabled) {
+    background: #0056b3;
+    transform: scale(1.03);
+  }
 
-    button:hover:not(:disabled) {
-      background: #0056b3;
-      transform: scale(1.02);
-    }
+  button:disabled {
+    background: #28a745;
+    cursor: not-allowed;
+  }
 
-    button:disabled {
-      background: #28a745;
-      cursor: not-allowed;
-    }
+  textarea {
+    resize: vertical;
+    line-height: 1.6;
+    box-sizing: border-box;
+    text-align: left;
+    vertical-align: bottom;
+    transition: all 0.3s;
+  }
 
-    textarea {
-      resize: vertical;
-      line-height: 1.6;
-      box-sizing: border-box;
-      text-align: left;
-      vertical-align: bottom;
-      transition: all 0.3s;
-    }
+  .login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 15px;
+  }
 
-    textarea::placeholder {
-      color: #888;
-    }
+  .login-link a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
 
-    @media (max-width: 800px) { textarea { min-height: 200px; } }
-    @media (min-width: 601px) and (max-width: 1024px) { textarea { min-height: 200px; } }
-    @media (min-width: 1025px) { textarea { min-height: 300px; } }
+  .login-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
 
-    /* Log in link styling */
-    .login-link {
-      text-align: center;
-      margin-top: 10px;
-    }
-    .login-link a {
-      text-decoration: none;
-      color: #007bff;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    .login-link a:hover {
-      color: #0056b3;
-      text-decoration: underline;
-    }
+  footer {
+    background: #0d6efd;
+    color: white;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-top: auto;
+    border-top: 2px solid #084298;
+    border-radius: 5px 5px 0 0;
+  }
 
-    /* Narrow Footer Style */
-    footer {
-      background: #0d6efd;
-      color: white;
-      text-align: center;
-      padding: 6px 10px;
-      font-size: 13px;
-      margin-top: auto;
-      border-top: 2px solid #084298;
-      border-radius: 5px 5px 0 0;
-    }
-    footer span { font-weight: bold; }
+  footer span { font-weight: bold; }
+
+  /* Responsive Fix */
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    h2 { font-size: 1.2rem; }
+    form { padding: 20px; width: 100%; }
+    input, select, textarea, button { font-size: 16px; }
+  }
+</style>
   </style>
 </head>
 <body>
