@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>EDC অভিযোগ ফর্ম</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #eef6ff;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 420px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label { display: block; margin-top: 10px; font-weight: bold; }
+
+    /* ফন্ট সাইজ ছোট করা হলো */
+    form input,
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px; /* ছোট ফন্ট */
+    }
+
+    button {
+      width: 100%;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    select[name="type"] {
+  font-size: 12px;
+}
+
+    button:hover:not(:disabled) { background: #0056b3; }
+    button:disabled {
+      background: #28a745;
+      cursor: not-allowed;
+    }
+
+    /* Footer Style */
+    footer {
+      background: #0d6efd;
+      color: white;
+      text-align: center;
+      padding: 10px 5px;
+      font-size: 15px;
+      margin-top: auto;
+      border-top: 2px solid #084298;
+    }
+    footer span { font-weight: bold; }
+
+    /* Textarea responsive */
+    textarea {
+      resize: vertical;
+      line-height: 1.6;
+      box-sizing: border-box;
+      text-align: left;
+      vertical-align: bottom;
+    }
+    textarea::placeholder { vertical-align: bottom; }
+
+    @media (max-width: 600px) { textarea { min-height: 100px; } }
+    @media (min-width: 601px) and (max-width: 1024px) { textarea { min-height: 150px; } }
+    @media (min-width: 1025px) { textarea { min-height: 200px; } }
+
+    /* Log in link styling */
+    .login-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .login-link a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+    }
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📋 EDC প্রকল্পের ইন্টারনেট সংযোগ সংক্রান্ত অভিযোগ ফর্ম</h2>
+
+  <form id="complainForm">
+    <label>উপজেলার নাম:</label>
+    <select name="upazila" required>
+      <option value="">-- উপজেলা নির্বাচন করুন --</option>
+      <option>যশোর সদর</option>
+      <option>শার্শা</option>
+      <option>মনিরামপুর</option>
+      <option>কেশবপুর</option>
+      <option>ঝিকরগাছা</option>
+      <option>চৌগাছা</option>
+      <option>বাঘারপাড়া</option>
+      <option>অভয়নগর</option>
+    </select>
+
+    <label>পৌরসভা / ইউনিয়ন (বাংলাতে লিখুন):</label>
+    <input name="union" required>
+
+    <label>প্রতিষ্ঠানের নাম ও ঠিকানা (বাংলাতে লিখুন):</label>
+    <input name="orgName" required>
+
+    <label>প্রতিষ্ঠানের মোবাইল নাম্বার (ইংলিশ):</label>
+    <input name="phone" type="tel" pattern="[0-9+()\- \s]+" required>
+
+    <label>কানেকশন নাম্বার (ONU গায়ে লেখা):</label>
+    <input name="connection">
+
+    <label>অভিযোগের ধরণ:</label>
+    <select name="type" required>
+      <option>ইন্টারনেট সংযোগ স্লো</option>
+      <option>ইন্টারনেট সংযোগ নেই</option>
+      <option>নেটওয়ার্ক ইকুইপমেণ্ট (Wifi রাউটার/ONU/পাওয়ার ক্যাবল) নষ্ট</option>
+      <option>নেটওয়ার্ক ইকুইপমেণ্ট (Wifi রাউটার/ONU/পাওয়ার ক্যাবল) চুরি হয়েছে</option>
+    </select>
+
+    <label>অভিযোগের বিবরণ (বাংলাতে লিখুন):</label>
+    <textarea id="details" name="details" placeholder="এখানে লিখুন..."></textarea>
+
+    <button type="submit" id="submitBtn">অভিযোগ জমা দিন</button>
+  </form>
+
+  <!-- Log in | Admin এখন ফর্মের নিচে -->
+  <div class="login-link">
+    <a href="https://www.er.com" target="_blank">🔐 Log in | Admin Panel</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span>Developed by Engr. Abdullah Al Mamun</span> | Assistant Network Engineer, DOICT<br>
+    IEB Membership No: <span>A23504</span> <span>Email: mamun.anedoict21@gmail.com</span>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const textarea = document.getElementById("details");
+    textarea.addEventListener("input", function () {
+      this.style.height = "auto";
+      this.style.height = this.scrollHeight + "px";
+    });
+
+    const API = "https://script.google.com/macros/s/AKfycbwntN-fIbZrYTRvoUQi1CpgCP6OUPCxc7shXefBT4OEn_t68Xa_J3pSEKm-OT8qcBFt0g/exec";
+    const form = document.getElementById('complainForm');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = "⏳ পাঠানো হচ্ছে...";
+
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+      data.action = "add";
+
+      // বাংলাদেশ টাইমজোন অনুযায়ী তারিখ + সময়
+      const bdDateTime = new Date().toLocaleString('en-CA', { timeZone: 'Asia/Dhaka' });
+      data.Timestamp = bdDateTime;
+
+      try {
+        await fetch(API, {
+          method: "POST",
+          body: JSON.stringify(data)
+        });
+
+        btn.textContent = "✅ অভিযোগ সফলভাবে জমা হয়েছে";
+        alert("✅ অভিযোগ সফলভাবে পাঠানো হয়েছে!\nতারিখ ও সময়: " + bdDateTime);
+        e.target.reset();
+        btn.disabled = false;
+        btn.textContent = "অভিযোগ জমা দিন";
+
+      } catch (err) {
+        alert("❌ পাঠাতে সমস্যা হয়েছে, অনুগ্রহ করে আবার চেষ্টা করুন।");
+        btn.disabled = false;
+        btn.textContent = "অভিযোগ জমা দিন";
+      }
+    });
+  </script>
+</body>
+</html>
