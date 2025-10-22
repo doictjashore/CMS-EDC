@@ -12,10 +12,13 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      transition: background 0.3s;
     }
 
     h2 {
       text-align: center;
+      color: #0d6efd;
+      margin-bottom: 20px;
     }
 
     form {
@@ -24,21 +27,39 @@
       background: #fff;
       padding: 25px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    label { display: block; margin-top: 10px; font-weight: bold; }
+    form:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
 
-    /* ফন্ট সাইজ ছোট করা হলো */
-    form input,
-    form select,
-    form textarea {
+    label { 
+      display: block; 
+      margin-top: 10px; 
+      font-weight: bold; 
+    }
+
+    input, select, textarea {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       margin-top: 5px;
       border-radius: 5px;
       border: 1px solid #ccc;
-      font-size: 14px; /* ছোট ফন্ট */
+      font-size: 14px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0,123,255,0.5);
+      outline: none;
+    }
+
+    select[name="type"] {
+      font-size: 12px;
     }
 
     button {
@@ -51,38 +72,31 @@
       font-size: 16px;
       padding: 10px;
       border-radius: 5px;
+      transition: background 0.3s, transform 0.2s;
     }
-    select[name="type"] {
-  font-size: 12px;
-}
 
-    button:hover:not(:disabled) { background: #0056b3; }
+    button:hover:not(:disabled) {
+      background: #0056b3;
+      transform: scale(1.02);
+    }
+
     button:disabled {
       background: #28a745;
       cursor: not-allowed;
     }
 
-    /* Footer Style */
-    footer {
-      background: #0d6efd;
-      color: white;
-      text-align: center;
-      padding: 10px 5px;
-      font-size: 15px;
-      margin-top: auto;
-      border-top: 2px solid #084298;
-    }
-    footer span { font-weight: bold; }
-
-    /* Textarea responsive */
     textarea {
       resize: vertical;
       line-height: 1.6;
       box-sizing: border-box;
       text-align: left;
       vertical-align: bottom;
+      transition: all 0.3s;
     }
-    textarea::placeholder { vertical-align: bottom; }
+
+    textarea::placeholder {
+      color: #888;
+    }
 
     @media (max-width: 600px) { textarea { min-height: 100px; } }
     @media (min-width: 601px) and (max-width: 1024px) { textarea { min-height: 150px; } }
@@ -97,10 +111,25 @@
       text-decoration: none;
       color: #007bff;
       font-weight: bold;
+      transition: color 0.3s;
     }
     .login-link a:hover {
+      color: #0056b3;
       text-decoration: underline;
     }
+
+    /* Narrow Footer Style */
+    footer {
+      background: #0d6efd;
+      color: white;
+      text-align: center;
+      padding: 6px 10px;
+      font-size: 13px;
+      margin-top: auto;
+      border-top: 2px solid #084298;
+      border-radius: 5px 5px 0 0;
+    }
+    footer span { font-weight: bold; }
   </style>
 </head>
 <body>
@@ -147,18 +176,14 @@
     <button type="submit" id="submitBtn">অভিযোগ জমা দিন</button>
   </form>
 
-  <!-- Log in | Admin এখন ফর্মের নিচে -->
   <div class="login-link">
     <a href="https://doictjashore.github.io/CMS-EDC-admin/" target="_blank">🔐 Log in | Admin Panel</a>
   </div>
 
-  <!-- Footer -->
   <footer>
-    <span>Developed by Engr. Abdullah Al Mamun</span> | Assistant Network Engineer, DOICT<br>
-    IEB Membership No: <span>A23504</span> <span>Email: mamun.anedoict21@gmail.com</span>
+    <span>Developed by Engr. Abdullah Al Mamun</span> | Assistant Network Engineer, DOICT | IEB Membership No: <span>A23504</span>
   </footer>
 
-  <!-- Scripts -->
   <script>
     const textarea = document.getElementById("details");
     textarea.addEventListener("input", function () {
@@ -179,7 +204,6 @@
       const data = Object.fromEntries(formData.entries());
       data.action = "add";
 
-      // বাংলাদেশ টাইমজোন অনুযায়ী তারিখ + সময়
       const bdDateTime = new Date().toLocaleString('en-CA', { timeZone: 'Asia/Dhaka' });
       data.Timestamp = bdDateTime;
 
